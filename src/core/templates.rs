@@ -16,8 +16,7 @@ pub fn render_templates(config: &BinserveConfig) -> Result<(Handlebars<'static>,
         // register the partial templates
         let partial_template = std::fs::read_to_string(template_path).with_context(|| {
             format!(
-                "Failed to read Handlebars partial file: {:?}",
-                template_path
+                "Failed to read Handlebars partial file: {template_path:?}"
             )
         })?;
 

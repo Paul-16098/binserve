@@ -69,7 +69,7 @@ impl RouteHandle {
                             .replace(&starting_directory, "");
 
                         // combine route definition and file path under the specified directory
-                        route_index = format!("{}/{}", route, route_index);
+                        route_index = format!("{route}/{route_index}");
 
                         // handle index files
                         if route_index.ends_with("index.html") {
@@ -144,7 +144,7 @@ impl RouteHandle {
             route_str = route_fmt.as_str().into();
         }
 
-        route_str = format!("/{}", route_str);
+        route_str = format!("/{route_str}");
 
         ROUTEMAP.insert(route_str.into(), route_handle);
 

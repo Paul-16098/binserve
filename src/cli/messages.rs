@@ -19,5 +19,5 @@ pub fn push_message(log_type: Type, message: &str) {
         Type::Info => format!("{}{}{}", "[".bold(), "INFO".bold().cyan(), "]".bold()),
         Type::Success => format!("{}{}{}", "[".bold(), "SUCCESS".bold().green(), "]".bold()),
     };
-    eprintln!("{} {}", prefix, message)
+    eprintln!("{prefix} {message}")
 }
