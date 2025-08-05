@@ -8,7 +8,7 @@
     actix-web = { version = "4.5.1", features = [
         "rustls-0_22",
     ] }
-    actix-web-lab = "0.20.2"
+    actix-web-lab = "0.24.0"
     ahash = "0.8.8"
     anyhow = "1.0.57"
     clap = { version = "4.5.1", features = [
