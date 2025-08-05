@@ -13,7 +13,17 @@ env:
   PROJECT_AUTH: "mufeedvh"
   RUST_COV_SRV: "2020-08-01" ## (~v1.47.0) supported rust version for code coverage; (date required/used by 'coverage')
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - "./src/**/*.rs"
+      - "Cargo.toml"
+      - "Cargo.lock"
+  pull_request:
+    paths:
+      - "./src/**/*.rs"
+      - "Cargo.toml"
+      - "Cargo.lock"
 
 jobs:
   build:
