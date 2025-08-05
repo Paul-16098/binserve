@@ -24,6 +24,7 @@ on:
       - "./src/**/*.rs"
       - "Cargo.toml"
       - "Cargo.lock"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -84,7 +85,7 @@ jobs:
           target: ${{ matrix.job.target }}
           args: "--release"
           strip: true
-      
+
       - run: tree
 
       - name: Publish artifacts and release
