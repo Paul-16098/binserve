@@ -166,44 +166,6 @@ jobs:
           mkdir -p '${{ steps.vars.outputs.STAGING }}'
           mkdir -p '${{ steps.vars.outputs.STAGING }}/${{ steps.vars.outputs.PKG_BASENAME }}'
           mkdir -p '${{ steps.vars.outputs.STAGING }}/dpkg'
-      - name: rust toolchain ~ install
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: ${{ steps.vars.outputs.TOOLCHAIN }}
-          target: ${{ matrix.job.target }}
-          default: true
-          profile: minimal # minimal component installation (ie, no documentation)
-      - name: Install `cargo-tree` # for dependency information
-        uses: actions-rs/install@v0.1
-        with:
-          crate: cargo-tree
-          version: latest
-          use-tool-cache: true
-        env:
-          RUSTUP_TOOLCHAIN: stable
-      - name: Info
-        shell: bash
-        run: |
-          # Info
-          ## commit info
-          echo "## commit"
-          echo GITHUB_REF=${GITHUB_REF}
-          echo GITHUB_SHA=${GITHUB_SHA}
-          ## environment
-          echo "## environment"
-          echo "CI='${CI}'"
-          ## tooling info display
-          echo "## tooling"
-          which gcc >/dev/null 2>&1 && (gcc --version | head -1) || true
-          rustup -V
-          rustup show active-toolchain
-          cargo -V
-          rustc -V
-          cargo-tree tree -V
-          ## dependencies
-          echo "## dependency list"
-          cargo fetch --quiet
-          cargo-tree tree --target=${{ matrix.job.target }} ${{ matrix.job.cargo-options }} ${{ steps.vars.outputs.CARGO_FEATURES_OPTION }} --all --no-dev-dependencies --no-indent | grep -vE "$PWD" | sort --unique
 
       - name: Build binary
         uses: houseabsolute/actions-rust-cross@v1
