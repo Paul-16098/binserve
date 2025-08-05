@@ -86,7 +86,7 @@ jobs:
           args: "--release"
           strip: true
 
-      - run: tree
+      - run: tree /F
 
       - name: Publish artifacts and release
         uses: houseabsolute/actions-rust-release@v0
