@@ -84,6 +84,8 @@ jobs:
           target: ${{ matrix.job.target }}
           args: "--release"
           strip: true
+      
+      - run: tree
 
       - name: Publish artifacts and release
         uses: houseabsolute/actions-rust-release@v0
