@@ -51,6 +51,8 @@ jobs:
       - name: install cmake with ubuntu
         run: sudo apt-get install -y cmake
         if: ${{ contains(matrix.job.os, 'ubuntu') }}
+      - name: install bindgen
+        run: cargo install --force --locked bindgen-cli
 
       - name: Test
         uses: houseabsolute/actions-rust-cross@v1
