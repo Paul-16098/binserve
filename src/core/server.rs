@@ -4,6 +4,7 @@ use actix_web::{
       HeaderMap,
       HeaderValue,
       CACHE_CONTROL,
+      CONTENT_TYPE,
       ETAG,
       IF_MODIFIED_SINCE,
       IF_NONE_MATCH,
@@ -183,6 +184,8 @@ pub async fn run_server(config_state: BinserveConfig) -> std::io::Result<()> {
           SERVER,
           format!("binserve/{}", env!("CARGO_PKG_VERSION")),
         ));
+        // https://developer.mozilla.org/docs/Web/HTTP/Reference/Headers/Content-Type
+        headers_middleware = headers_middleware.add((CONTENT_TYPE, "text/html; charset=utf-8"));
 
         // Add the `Cache-Control` header if enabled in config.
         //
@@ -278,7 +281,7 @@ pub async fn run_server(config_state: BinserveConfig) -> std::io::Result<()> {
       let address = host.split(':');
       let address = address.collect::<Vec<&str>>();
       if address.len() == 1 {
-        host = format!("{}:{}", host, "80");
+        host = format!("http://{}:{}/", host, "80");
       }
 
       push_message(MsgType::Success, &format!("Your server is up and running at {host} 🚀"));
@@ -296,7 +299,7 @@ pub async fn run_server(config_state: BinserveConfig) -> std::io::Result<()> {
     let tls_config = tls::load_rustls_config().unwrap();
 
     // bind the TLS host and the rustls configuration
-    http_server = http_server.bind_rustls_0_22(tls_host, tls_config)?;
+    http_server = http_server.bind_rustls_0_23(tls_host, tls_config)?;
   }
 
   http_server.run().await
