@@ -48,6 +48,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: install cmake with ubuntu
+        run: sudo apt-get install -y cmake
+        if: ${{ contains(matrix.job.os, 'ubuntu') }}
+
       - name: Test
         uses: houseabsolute/actions-rust-cross@v1
         id: test
