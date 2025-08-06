@@ -1,3 +1,4 @@
+use mime_guess2::mime;
 use actix_web::{ http::header::{ HeaderValue, HttpDate }, web::Bytes };
 
 use std::collections::HashMap;
@@ -82,7 +83,7 @@ impl StaticFile {
 
       // identify handlebars template
       if extension == "hbs" {
-        mime_type = "text/html"; // it's rendered to HTML at initialization
+        mime_type = "text/html".parse::<mime::Mime>().unwrap(); // it's rendered to HTML at initialization
 
         // handlebars registered handle and context with the template variables
         let (hbs_reg, hbs_ctx) = handlebars_handle;
@@ -104,7 +105,7 @@ impl StaticFile {
     }
 
     // prepared header values
-    let mime = Some(HeaderValue::from_str(mime_type)?);
+    let mime = Some(mime_type);
     let etag = Some(HeaderValue::from_str(&etag.to_string())?);
     let last_modified = Some(HeaderValue::from_str(&last_modified.to_string())?);
 
