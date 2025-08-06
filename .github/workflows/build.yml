@@ -19,11 +19,13 @@ on:
       - "./src/**/*.rs"
       - "Cargo.toml"
       - "Cargo.lock"
+      - ".github/workflows/build.yml"
   pull_request:
     paths:
       - "./src/**/*.rs"
       - "Cargo.toml"
       - "Cargo.lock"
+      - ".github/workflows/build.yml"
   workflow_dispatch:
 
 jobs:
@@ -46,22 +48,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Test
+        uses: houseabsolute/actions-rust-cross@v1
+        id: test
+        with:
+          command: test
+          target: ${{ matrix.job.target }}
+          args: "--release"
+
       - name: Build binary
         uses: houseabsolute/actions-rust-cross@v1
         with:
           command: build
           target: ${{ matrix.job.target }}
           args: "--release"
-          strip: true
-      - name: Test
-        uses: houseabsolute/actions-rust-cross@v1
-        with:
-          command: test
-          target: ${{ matrix.job.target }}
-          args: "--release"
-          strip: true
-
-      - run: tree /F target/x86_64-pc-windows-msvc/release/
 
       - name: Publish artifacts and release
         uses: houseabsolute/actions-rust-release@v0
