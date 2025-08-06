@@ -54,7 +54,6 @@ jobs:
         with:
           command: test
           target: ${{ matrix.job.target }}
-          args: "--release"
 
       - name: Build binary
         uses: houseabsolute/actions-rust-cross@v1
