@@ -281,7 +281,7 @@ pub async fn run_server(config_state: BinserveConfig) -> std::io::Result<()> {
       let address = host.split(':');
       let address = address.collect::<Vec<&str>>();
       if address.len() == 1 {
-        host = format!("http://{}:{}/", host, "80");
+        host = format!("{}:{}", host, "80");
       }
 
       push_message(
