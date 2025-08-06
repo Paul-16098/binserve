@@ -79,7 +79,7 @@ async fn router(req: HttpRequest) -> Result<HttpResponse> {
       // the response body in `Bytes`
       let body = handler.response.bytes.to_owned();
       // the mime type (`Content-Type`) derived from the file
-      let mime_type = handler.response.mime.as_ref().unwrap();
+      let mime_type: HeaderValue = handler.response.mime.as_ref().unwrap() + "; charset=utf-8";
       // the etag derived from the file metadata
       let etag = handler.response.etag.as_ref().unwrap();
       // the last modified timestamp of the file
@@ -183,6 +183,8 @@ pub async fn run_server(config_state: BinserveConfig) -> std::io::Result<()> {
           SERVER,
           format!("binserve/{}", env!("CARGO_PKG_VERSION")),
         ));
+        // https://developer.mozilla.org/docs/Web/HTTP/Reference/Headers/Content-Type
+        // headers_middleware = headers_middleware.add((CONTENT_TYPE, "text/html; charset=utf-8"));
 
         // Add the `Cache-Control` header if enabled in config.
         //
@@ -281,7 +283,10 @@ pub async fn run_server(config_state: BinserveConfig) -> std::io::Result<()> {
         host = format!("{}:{}", host, "80");
       }
 
-      push_message(MsgType::Success, &format!("Your server is up and running at {host} 🚀"));
+      push_message(
+        MsgType::Success,
+        &format!("Your server is up and running at http://{host}/ 🚀")
+      );
 
       host
     })?
