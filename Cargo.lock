@@ -510,8 +510,8 @@ dependencies = [
  "etag",
  "handlebars",
  "jwalk",
+ "mime_guess2",
  "minify-html-onepass",
- "new_mime_guess",
  "notify-debouncer-mini",
  "num_cpus",
  "once_cell",
@@ -1860,6 +1860,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "mime_guess2"
+version = "2.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1706dc14a2e140dec0a7a07109d9a3d5890b81e85bd6c60b906b249a77adf0ca"
+dependencies = [
+ "mime",
+ "phf",
+ "phf_shared",
+ "unicase",
+]
+
+[[package]]
 name = "minify-html-common"
 version = "0.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1925,16 +1937,6 @@ dependencies = [
  "log",
  "wasi 0.11.1+wasi-snapshot-preview1",
  "windows-sys 0.59.0",
-]
-
-[[package]]
-name = "new_mime_guess"
-version = "4.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "02a2dfb3559d53e90b709376af1c379462f7fb3085a0177deb73e6ea0d99eff4"
-dependencies = [
- "mime",
- "unicase",
 ]
 
 [[package]]
@@ -2213,6 +2215,7 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.104",
+ "unicase",
 ]
 
 [[package]]
@@ -2222,6 +2225,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "67eabc2ef2a60eb7faa00097bd1ffdb5bd28e62bf39990626a582201b7a754e5"
 dependencies = [
  "siphasher",
+ "unicase",
 ]
 
 [[package]]

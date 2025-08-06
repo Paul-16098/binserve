@@ -80,7 +80,12 @@ async fn router(req: HttpRequest) -> Result<HttpResponse> {
       // the response body in `Bytes`
       let body = handler.response.bytes.to_owned();
       // the mime type (`Content-Type`) derived from the file
-      let mime_type: HeaderValue = handler.response.mime.as_ref().unwrap() + "; charset=utf-8";
+      let mime_type: mime_guess2::Mime = (
+        handler.response.mime.as_ref().unwrap().to_str().unwrap().to_string() +
+        "; charset=utf-8".to_string()
+      )
+        .parse::<mime::Mime>()
+        .unwrap();
       // the etag derived from the file metadata
       let etag = handler.response.etag.as_ref().unwrap();
       // the last modified timestamp of the file
