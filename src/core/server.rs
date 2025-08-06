@@ -81,7 +81,7 @@ async fn router(req: HttpRequest) -> Result<HttpResponse> {
       let body = handler.response.bytes.to_owned();
       // the mime type (`Content-Type`) derived from the file
       let mime_type: mime_guess2::Mime = (
-        handler.response.mime.as_ref().unwrap().to_string().unwrap() + "; charset=utf-8"
+        handler.response.mime.as_ref().unwrap().to_string() + "; charset=utf-8"
       )
         .parse::<mime::Mime>()
         .unwrap();
