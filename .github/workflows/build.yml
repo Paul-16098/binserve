@@ -16,16 +16,16 @@ env:
 on:
   push:
     paths:
-      - "./src/*/*.rs"
-      - "Cargo.toml"
-      - "Cargo.lock"
-      - ".github/workflows/build.yml"
+      - "**.rs"
+      - "./Cargo.toml"
+      - "./Cargo.lock"
+      - "./.github/workflows/*.yml"
   pull_request:
     paths:
-      - "./src/*/*.rs"
-      - "Cargo.toml"
-      - "Cargo.lock"
-      - ".github/workflows/build.yml"
+      - "**.rs"
+      - "./Cargo.toml"
+      - "./Cargo.lock"
+      - "./.github/workflows/*.yml"
   workflow_dispatch:
 
 jobs:
