@@ -19,7 +19,7 @@ use super::config::{ DEFAULT_CONFIG_FILE, CONFIG_STATE };
 /// Represents a static file
 #[derive(Debug)]
 pub struct StaticFile {
-  pub mime: Option<HeaderValue>, // mime type of the file
+  pub mime: Option<mime::Mime>, // mime type of the file
   pub bytes: Bytes, // contents of the file in bytes
   pub path: PathBuf, // path to the file in disk
   pub etag: Option<HeaderValue>, // etag header value (RFC 7232 §2.3)
