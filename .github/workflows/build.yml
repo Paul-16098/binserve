@@ -43,7 +43,7 @@ jobs:
           - { os: windows-latest, target: x86_64-pc-windows-gnu } ## note: requires rust >= 1.43.0 to link correctly
           - { os: windows-latest, target: x86_64-pc-windows-msvc }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: install cmake with ubuntu
         run: sudo apt-get install -y cmake
